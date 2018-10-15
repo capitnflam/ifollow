@@ -29,9 +29,12 @@ jobs:
             JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
       - run: # run coverage report
           name: code-coverage
-          command: 'yarn coverage'
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
+          command: yarn coverage
+      - run:
+          name: upload coverage
+          command: codecov
+      #- store_artifacts:
+      #    path: coverage
+      #    prefix: coverage
       - store_test_results:
           path: 'reports/junit'
