@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "jest tests/",
-    "test:ci": "jest --ci --reporters=default --reporters=jest-junit tests/",
+    "test": "jest",
+    "test:ci": "jest --ci --reporters=default --reporters=jest-junit",
     "coverage": "yarn test --coverage",
     "lint": "eslint src/*.js tests/*.js",
     "format": "prettier --write src/*.js tests/*.js"
