@@ -32,7 +32,7 @@ jobs:
           command: yarn coverage
       - run:
           name: upload coverage
-          command: codecov
+          command: yarn codecov
       #- store_artifacts:
       #    path: coverage
       #    prefix: coverage
