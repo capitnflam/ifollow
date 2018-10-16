@@ -1,15 +1,19 @@
 {
-    "extends": [
-        "standard",
-        "plugin:eslint-comments/recommended",
-        "plugin:jest/recommended",
-        "eslint:recommended",
-        "plugin:prettier/recommended",
-        "plugin:node/recommended",
-        "plugin:promise/recommended",
-        "prettier/standard"
-    ],
-    "plugins": [
-        "prettier"
-    ]
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "node",
+    "eslint:recommended",
+    "plugin:eslint-comments/recommended",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended",
+    "plugin:node/recommended",
+    "plugin:promise/recommended",
+    "plugin:import/recommended"
+  ],
+  "plugins": ["prettier", "promise"],
+  "rules": {
+    "import/no-commonjs": 0
+  }
 }
