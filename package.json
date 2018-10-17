@@ -9,7 +9,9 @@
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit",
     "coverage": "yarn test --coverage",
     "lint": "eslint src/*.js tests/*.js",
-    "format": "prettier --write src/*.js tests/*.js"
+    "format": "prettier --write src/*.js tests/*.js",
+    "build:app": "cd client && yarn build",
+    "postinstall": "cd client && yarn install"
   },
   "author": "capitN.flam",
   "license": "MIT",

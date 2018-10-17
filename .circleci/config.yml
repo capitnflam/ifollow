@@ -18,6 +18,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - dependency-cache-
       - run: yarn install
+      - run: yarn build:app
       - save_cache:
           paths:
             - node_modules
