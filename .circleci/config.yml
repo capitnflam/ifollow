@@ -18,24 +18,8 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - dependency-cache-
       - run: yarn install
-      - run: yarn build:app
+      - run: yarn build
       - save_cache:
           paths:
             - node_modules
           key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Run tests
-          command: yarn test:ci
-          environment:
-            JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
-      - run: # run coverage report
-          name: code-coverage
-          command: yarn coverage
-      - run:
-          name: upload coverage
-          command: yarn codecov
-      #- store_artifacts:
-      #    path: coverage
-      #    prefix: coverage
-      - store_test_results:
-          path: 'reports/junit'
