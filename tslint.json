@@ -1,0 +1,18 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "rules": {
+    "curly": false,
+    "max-classes-per-file": false,
+    "interface-name": false,
+    "no-console": false,
+    "no-empty-interface": false,
+    "ordered-imports": [
+      true,
+      {
+        "named-imports-order": "lowercase-first"
+      }
+    ],
+    "variable-name": [true, "allow-leading-underscore"]
+  }
+}
