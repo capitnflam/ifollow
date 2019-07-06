@@ -1,18 +1,14 @@
-import express from 'express'
-import * as path from 'path'
 import cluster from 'cluster'
-import { cpus } from 'os'
 
-const numCPUs = cpus().length
-const isDev = process.env.NODE_ENV !== 'production'
-const PORT = process.env.PORT || 5000
+import config from './config'
+import serve from './server'
 
 // Multi-process to utilize all CPU cores.
-if (!isDev && cluster.isMaster) {
+if (!config.isDev && cluster.isMaster) {
   console.error(`Node cluster master ${process.pid} is running`)
 
   // Fork workers.
-  for (let i = 0; i < numCPUs; i++) {
+  for (let i = 0; i < config.numCPUs; i++) {
     cluster.fork()
   }
 
@@ -22,29 +18,5 @@ if (!isDev && cluster.isMaster) {
     )
   })
 } else {
-  const app = express()
-
-  // Priority serve any static files.
-  app.use(express.static(path.resolve(__dirname, '../react-ui/build')))
-
-  // Answer API requests.
-  app.get('/api', function(req, res) {
-    res.set('Content-Type', 'application/json')
-    res.send('{"message":"Hello from the custom server!"}')
-  })
-
-  // All remaining requests return the React app, so it can handle routing.
-  app.get('*', function(request, response) {
-    response.sendFile(
-      path.resolve(__dirname, '../react-ui/build', 'index.html'),
-    )
-  })
-
-  app.listen(PORT, function() {
-    console.error(
-      `Node ${
-        isDev ? 'dev server' : 'cluster worker ' + process.pid
-      }: listening on port ${PORT}`,
-    )
-  })
+  serve(config)
 }
