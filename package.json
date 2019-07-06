@@ -7,10 +7,13 @@
   "scripts": {
     "start": "yarn api:serve",
     "build": "concurrently -r --kill-others-on-fail \"yarn api:build\" \"yarn ui:build\"",
+    "clean": "concurrently -r \"yarn api:clean\" \"ui:clean\"",
     "api:build": "tsc",
+    "api:clean": "rimraf build",
     "api:serve": "node dist/index.js",
     "api:lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "ui:build": "cd react-ui/ && yarn && yarn build"
+    "ui:build": "cd react-ui && yarn && yarn build",
+    "ui:clean": "cd react-ui && yarn clean"
   },
   "cacheDirectories": [
     "node_modules",
@@ -30,6 +33,7 @@
     "@types/node": "^12.0.12",
     "concurrently": "^4.1.1",
     "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.5.2"
