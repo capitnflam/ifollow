@@ -7,7 +7,7 @@
   "scripts": {
     "start": "yarn api:serve",
     "build": "concurrently -r --kill-others-on-fail \"yarn api:build\" \"yarn ui:build\"",
-    "clean": "concurrently -r \"yarn api:clean\" \"ui:clean\"",
+    "clean": "concurrently -r \"yarn api:clean\" \"yarn ui:clean\"",
     "api:build": "tsc",
     "api:clean": "rimraf build",
     "api:serve": "node dist/index.js",
