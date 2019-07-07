@@ -9,6 +9,6 @@ export default class Db {
   }
 
   public async connect() {
-    this.db = await MongoClient.connect(this.uri)
+    this.db = await MongoClient.connect(this.uri, { useNewUrlParser: true })
   }
 }

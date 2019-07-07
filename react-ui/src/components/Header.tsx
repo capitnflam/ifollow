@@ -2,13 +2,15 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Container from '@material-ui/core/Container'
 
-import Header from './components/Header'
+interface HeaderProps {}
 
-export default class App extends React.PureComponent {
+export default class Header extends React.PureComponent<HeaderProps, {}> {
   render() {
     return (
       <Container>
-        <Header />
+        <AppBar>
+          <h1>Foo</h1>
+        </AppBar>
       </Container>
     )
   }
