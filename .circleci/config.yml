@@ -17,8 +17,7 @@ references:
   persist_to_workspace: &persist_to_workspace
     root: '.'
     paths:
-      - packages
-      - react-ui/packages
+      - .
   attach_workspace: &attach_workspace
     at: '.'
   deploy_filter: &deploy_filter
