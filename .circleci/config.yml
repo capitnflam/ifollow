@@ -1,28 +1,64 @@
 version: 2
-jobs:
-  build:
+
+references:
+  setup_env: &setup_env
     docker:
-      # specify the version you desire here
       - image: circleci/node:12.6-stretch
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-    working_directory: ~/ifollow
+  save_cache:
+    key: v2-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "react-ui/yarn.lock" }}
+    paths:
+      - ~/.cache/yarn
+      - ~/project/node_modules
+      - ~/project/react-ui/node_modules
+  restore_cache: &restore_cache
+    keys:
+      - v2-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "react-ui/yarn.lock" }}
+      - v2-dependency-cache-
+  persist_to_workspace: &persist_to_workspace
+    root: '.'
+    paths:
+      - packages
+      - react-ui/packages
+  attach_workspace: &attach_workspace
+    at: '.'
+  deploy_filter: &deploy_filter
+    branches:
+      only:
+        - master
+
+jobs:
+  install_dependencies:
+    <<: *setup_env
     steps:
       - checkout
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - dependency-cache-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - dependency-cache-
-      - run: yarn install
-      - run: yarn build
-      - save_cache:
-          paths:
-            - node_modules
-          key: dependency-cache-{{ checksum "package.json" }}
+      - restore_cache: *restore_cache
+      - run: yarn --frozen-lockfile
+      - run: cd react-ui && yarn --frozen-lockfile
+      - save_cache: *save_cache
+      - persist_to_workspace: *persist_to_workspace
+
+  build:
+    <<: *setup_env
+    steps:
+      - checkout
+      - attach_workspace: *attach_workspace
+      - run: yarn build:ci
+      - persist_to_workspace: *persist_to_workspace
+
+  lint:
+    <<: *setup_env
+    steps:
+      - checkout
+      - attach_workspace: *attach_workspace
+      - run: yarn lint
+
+  test:
+    <<: *setup_env
+    steps:
+      - checkout
+      - attach_workspace: *attach_workspace
+      - run: yarn test
+
   deploy:
     docker:
       - image: buildpack-deps:trusty
@@ -37,10 +73,21 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - install_dependencies
+      - build:
+          requires:
+            - install_dependencies
+      - lint:
+          requires:
+            - install_dependencies
+      - test:
+          requires:
+            - install_dependencies
+            - build
       - deploy:
           requires:
+            - install_dependencies
             - build
-          filters:
-            branches:
-              only: master
+            - lint
+            - test
+          filters: *deploy_filter

@@ -25,9 +25,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cross-env CI=true NODE_ENV=test react-scripts test",
     "eject": "react-scripts eject",
-    "clean": "rimraf build"
+    "clean": "rimraf build",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,8 +47,8 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.15",
+    "cross-env": "^5.2.0",
     "prettier": "^1.18.2",
-    "redux-devtools-extension": "^2.13.8",
     "rimraf": "^2.6.3",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",

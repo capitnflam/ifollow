@@ -1,6 +1,6 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
     "curly": false,
     "max-classes-per-file": false,
