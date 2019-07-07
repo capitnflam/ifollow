@@ -4,7 +4,7 @@ references:
   setup_env: &setup_env
     docker:
       - image: circleci/node:12.6-stretch
-  save_cache:
+  save_cache: &save_cache
     key: v2-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "react-ui/yarn.lock" }}
     paths:
       - ~/.cache/yarn
