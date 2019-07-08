@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import * as path from 'path'
 
 import Db from './db'
@@ -15,16 +15,20 @@ const serve = async (config: Config) => {
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')))
 
   // Answer API requests.
-  app.get('/api', (req, res) => {
+  app.get('/api', (req: Request, res: Response) => {
     res.set('Content-Type', 'application/json')
     res.send('{"message":"Hello from the custom server!"}')
   })
 
-  // All remaining requests return the React app, so it can handle routing.
-  app.get('*', (request, response) => {
-    response.sendFile(
-      path.resolve(__dirname, '../react-ui/build', 'index.html'),
+  app.get('/googlef55e3a2a29939a68.html', (req: Request, res: Response) => {
+    res.sendFile(
+      path.resolve(__dirname, '../static', 'googlef55e3a2a29939a68.html'),
     )
+  })
+
+  // All remaining requests return the React app, so it can handle routing.
+  app.get('*', (req: Request, res: Response) => {
+    res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'))
   })
 
   app.listen(config.port, () => {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { WithStyles, createStyles } from '@material-ui/core'
 import { Theme, withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -7,24 +8,23 @@ import IconButton from '@material-ui/core/IconButton'
 import LibraryAdd from '@material-ui/icons/LibraryAdd'
 import MenuIcon from '@material-ui/icons/Menu'
 
-interface HeaderProps {
-  classes: any
-}
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    addButton: {
+      marginLeft: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  })
 
-const styles = (theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  addButton: {
-    marginLeft: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-})
+interface HeaderProps extends WithStyles<typeof styles> {}
 
 class Header extends React.PureComponent<HeaderProps, {}> {
   render() {
