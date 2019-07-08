@@ -25,8 +25,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:watch": "cra-build-watch",
     "test": "cross-env CI=true NODE_ENV=test react-scripts test",
-    "eject": "react-scripts eject",
     "clean": "rimraf build",
     "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.15",
+    "cra-build-watch": "^1.4.1",
     "cross-env": "^5.2.0",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
