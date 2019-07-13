@@ -31,8 +31,8 @@ jobs:
     steps:
       - checkout
       - restore_cache: *restore_cache
-      - run: yarn --frozen-lockfile
       - run: cd react-ui && yarn --frozen-lockfile
+      - run: yarn --frozen-lockfile
       - save_cache: *save_cache
       - persist_to_workspace: *persist_to_workspace
 
