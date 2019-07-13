@@ -1,3 +1,4 @@
+import { json as bodyParserJson } from 'body-parser'
 import express, { Request, Response } from 'express'
 import * as path from 'path'
 
@@ -13,6 +14,8 @@ const serve = async (config: Config) => {
 
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')))
+
+  app.use(bodyParserJson())
 
   // Answer API requests.
   app.get('/api', (req: Request, res: Response) => {

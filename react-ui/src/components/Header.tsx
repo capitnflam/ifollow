@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton'
 import LibraryAdd from '@material-ui/icons/LibraryAdd'
 import MenuIcon from '@material-ui/icons/Menu'
 
+import MainMenu from './MainMenu'
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -26,7 +28,22 @@ const styles = (theme: Theme) =>
 
 interface HeaderProps extends WithStyles<typeof styles> {}
 
-class Header extends React.PureComponent<HeaderProps, {}> {
+interface HeaderState {
+  mainMenu: { open: boolean; anchor?: HTMLElement }
+}
+
+class Header extends React.PureComponent<HeaderProps, HeaderState> {
+  constructor(props: HeaderProps) {
+    super(props)
+    this.state = { mainMenu: { open: false } }
+  }
+
+  handleMenuClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    this.setState({ mainMenu: { open: true, anchor: event.currentTarget } })
+  }
+
   render() {
     const { classes } = this.props
 
@@ -39,9 +56,15 @@ class Header extends React.PureComponent<HeaderProps, {}> {
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
+              onClick={this.handleMenuClick}
             >
               <MenuIcon />
             </IconButton>
+            <MainMenu
+              open={this.state.mainMenu.open}
+              anchor={this.state.mainMenu.anchor}
+              handle={this.handleMenuClick}
+            />
             <Typography variant="h6" className={classes.title}>
               iFollow
             </Typography>
