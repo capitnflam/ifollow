@@ -127,8 +127,8 @@ declare module 'tmdb' {
   }
 
   export class RemoteError extends TmdbError {
-    code: number
-    message: string
+    private code: number
+    private message: string
 
     constructor(message: string, code: number)
   }
@@ -138,31 +138,31 @@ declare module 'tmdb' {
   }
 
   export class Tmdb {
-    apiKey: string
-    language: string
+    private apiKey: string
+    private language: string
 
     constructor(apiKey: string, language: string = 'en')
-    async get(resource: string, parameters: QueryType = {}): object
-    async getMovie(movieId: number): Promise<MovieType>
-    async getMovieBackdropImages(
+    public async get(resource: string, parameters: QueryType = {}): object
+    public async getMovie(movieId: number): Promise<MovieType>
+    public async getMovieBackdropImages(
       movieId: number,
       includeImageLanguage: ReadOnlyArray<string>,
     ): Promise<ReadOnlyArray<MovieBackdropImageType>>
-    async getMovieCastCredits(
+    public async getMovieCastCredits(
       movieId: number,
     ): Promise<ReadOnlyArray<MovieCastCreditType>>
-    async getMovieCrewCredits(
+    public async getMovieCrewCredits(
       movieId: number,
     ): Promise<ReadOnlyArray<MovieCrewCreditType>>
-    async getMoviePosterImages(
+    public async getMoviePosterImages(
       movieId: number,
       includeImageLanguage: ReadOnlyArray<string>,
     ): Promise<ReadOnlyArray<MoviePosterImageType>>
-    async getMovieVideos(
+    public async getMovieVideos(
       movieId: number,
     ): Promise<ReadOnlyArray<MovieVideoType>>
-    async getPerson(personId: number): Promise<PersonType>
-    async findId(
+    public async getPerson(personId: number): Promise<PersonType>
+    public async findId(
       resourceType: 'movie' | 'person',
       externalSource: 'imdb',
       externalId: string,
