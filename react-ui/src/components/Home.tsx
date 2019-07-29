@@ -1,22 +1,9 @@
 import React from 'react'
 import { WithStyles, createStyles } from '@material-ui/core'
 import { Theme, withStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
 
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    addButton: {
-      marginLeft: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  })
+const styles = (theme: Theme) => createStyles({})
 
 interface HomeProps extends WithStyles<typeof styles> {}
 
@@ -25,9 +12,9 @@ class Home extends React.PureComponent<HomeProps, {}> {
     const { classes } = this.props
 
     return (
-      <div>
+      <Container>
         <span>WOOT</span>
-      </div>
+      </Container>
     )
   }
 }

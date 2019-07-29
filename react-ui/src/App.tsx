@@ -18,6 +18,18 @@ const Bar = () => (
   </div>
 )
 
+const Collection = () => (
+  <div>
+    <span>Collection</span>
+  </div>
+)
+
+const Configuration = () => (
+  <div>
+    <span>Configuration</span>
+  </div>
+)
+
 export default class App extends React.PureComponent {
   render() {
     return (
@@ -25,6 +37,8 @@ export default class App extends React.PureComponent {
         <Header />
         <Box>
           <Route component={Home} exact path="/" />
+          <Route component={Collection} exact path="/collection" />
+          <Route component={Configuration} exact path="/configuration" />
           <Route component={Bar} exact path="/bar" />
         </Box>
       </Container>

@@ -29,19 +29,27 @@ const styles = (theme: Theme) =>
 interface HeaderProps extends WithStyles<typeof styles> {}
 
 interface HeaderState {
-  mainMenu: { open: boolean; anchor?: HTMLElement }
+  mainMenu: { open: boolean }
 }
 
 class Header extends React.PureComponent<HeaderProps, HeaderState> {
+  state = { mainMenu: { open: false } }
+
   constructor(props: HeaderProps) {
     super(props)
-    this.state = { mainMenu: { open: false } }
   }
 
   handleMenuClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-    this.setState({ mainMenu: { open: true, anchor: event.currentTarget } })
+    this.setState({
+      mainMenu: { open: true },
+    })
+  }
+
+  handleMenuClose = (menuItem: string) => {
+    console.log(`open ${menuItem}`)
+    this.setState({ mainMenu: { open: false } })
   }
 
   render() {
@@ -62,8 +70,7 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
             </IconButton>
             <MainMenu
               open={this.state.mainMenu.open}
-              anchor={this.state.mainMenu.anchor}
-              handle={this.handleMenuClick}
+              handle={this.handleMenuClose}
             />
             <Typography variant="h6" className={classes.title}>
               iFollow
