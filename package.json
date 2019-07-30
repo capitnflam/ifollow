@@ -3,5 +3,30 @@
   "workspaces": [
     "api",
     "react-ui"
-  ]
+  ],
+  "scripts": {
+    "start": "yarn api:serve",
+    "build": "concurrently -r --kill-others-on-fail \"yarn api:build\" \"yarn ui:build\"",
+    "build:ci": "concurrently -r --kill-others-on-fail \"yarn api:build:ci\" \"yarn ui:build:ci\"",
+    "build:watch": "concurrently -r --kill-others-on-fail \"yarn api:build:watch\" \"yarn ui:build:watch\"",
+    "clean": "concurrently -r \"yarn api:clean\" \"yarn ui:clean\"",
+    "lint": "concurrently -r \"yarn api:lint\" \"yarn ui:lint\"",
+    "test": "concurrently -r \"yarn api:test\" \"yarn ui:test\"",
+    "api:build": "cd api && yarn build",
+    "api:build:ci": "cd api && yarn build:ci",
+    "api:build:watch": "cd api && yarn build:watch",
+    "api:clean": "cd api && yarn clean",
+    "api:serve": "cd api && yarn serve",
+    "api:lint": "cd api && yarn lint",
+    "api:test": "cd api && yarn test",
+    "ui:build": "cd react-ui && yarn build",
+    "ui:build:ci": "cd react-ui && yarn build",
+    "ui:build:watch": "cd react-ui && yarn build:watch",
+    "ui:clean": "cd react-ui && yarn clean",
+    "ui:lint": "cd react-ui && yarn lint",
+    "ui:test": "cd react-ui && yarn test"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.1"
+  }
 }
