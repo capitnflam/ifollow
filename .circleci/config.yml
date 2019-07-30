@@ -5,21 +5,22 @@ references:
     docker:
       - image: circleci/node:12.6-stretch
   save_cache: &save_cache
-    key: v2-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "react-ui/yarn.lock" }}
+    key: v2-dependency-cache-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
       - ~/project/node_modules
+      - ~/project/api/node_modules
       - ~/project/react-ui/node_modules
   restore_cache: &restore_cache
     keys:
-      - v2-dependency-cache-{{ checksum "yarn.lock" }}-{{ checksum "react-ui/yarn.lock" }}
+      - v2-dependency-cache-{{ checksum "yarn.lock" }}
       - v2-dependency-cache-
   persist_to_workspace: &persist_to_workspace
-    root: '.'
+    root: "."
     paths:
       - .
   attach_workspace: &attach_workspace
-    at: '.'
+    at: "."
   deploy_filter: &deploy_filter
     branches:
       only:
@@ -32,7 +33,6 @@ jobs:
       - checkout
       - restore_cache: *restore_cache
       - run: yarn --frozen-lockfile
-      - run: cd react-ui && yarn --frozen-lockfile
       - save_cache: *save_cache
       - persist_to_workspace: *persist_to_workspace
 
