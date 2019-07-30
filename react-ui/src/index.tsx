@@ -13,7 +13,7 @@ import * as serviceWorker from './serviceWorker'
 const rootElement = document.getElementById('root')
 ReactDOM.render(
   <BrowserRouter>
-    <Provider store={configureStore({})}>
+    <Provider store={configureStore({ mainMenu: { open: false } })}>
       <App />
     </Provider>
   </BrowserRouter>,

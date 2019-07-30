@@ -31,7 +31,7 @@ const serve = async (config: Config) => {
 
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', (req: Request, res: Response) => {
-    res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, '../../react-ui/build', 'index.html'))
   })
 
   app.listen(config.port, () => {
