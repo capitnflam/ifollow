@@ -35,9 +35,9 @@ interface HeaderState {
 class Header extends React.PureComponent<HeaderProps, HeaderState> {
   state = { mainMenu: { open: false } }
 
-  constructor(props: HeaderProps) {
-    super(props)
-  }
+  // constructor(props: HeaderProps) {
+  //   super(props)
+  // }
 
   handleMenuClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,

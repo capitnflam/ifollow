@@ -2,10 +2,10 @@ import React from 'react'
 import { WithStyles, createStyles } from '@material-ui/core'
 import { Theme, withStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
-import Menu from '@material-ui/core/Menu'
+// import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-import MenuList from '@material-ui/core/MenuList'
-import Link from '@material-ui/core/Link'
+// import MenuList from '@material-ui/core/MenuList'
+// import Link from '@material-ui/core/Link'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -62,7 +62,7 @@ class MainMenu extends React.PureComponent<MainMenuProps, MainMenuState> {
   }
 
   render() {
-    const { classes } = this.props
+    // const { classes } = this.props
     const { open } = this.state
 
     return (

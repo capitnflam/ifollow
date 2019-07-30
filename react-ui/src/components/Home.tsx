@@ -9,7 +9,7 @@ interface HomeProps extends WithStyles<typeof styles> {}
 
 class Home extends React.PureComponent<HomeProps, {}> {
   render() {
-    const { classes } = this.props
+    // const { classes } = this.props
 
     return (
       <Container>

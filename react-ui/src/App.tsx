@@ -6,11 +6,11 @@ import Container from '@material-ui/core/Container'
 import Header from './components/Header'
 import Home from './components/Home'
 
-const Foo = () => (
-  <div>
-    <span>Foobar</span>
-  </div>
-)
+// const Foo = () => (
+//   <div>
+//     <span>Foobar</span>
+//   </div>
+// )
 
 const Bar = () => (
   <div>
